@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>治療選択肢の比較</h2>
+<table border="1" cellpadding="4">
+  <tr>
+    <th>項目</th>
+    {% for t in options %}
+      <th>{{ t.name }}</th>
+    {% endfor %}
+  </tr>
+
+  {% for attr in attributes %}
+    <tr>
+      <td>{{ attr.name }}</td>
+      {% for t in options %}
+        {% set d = detail_map.get((t.id, attr.id)) %}
+        <td>
+          {% if d %}
+            {% if d.pros_text %}
+              <strong>メリット：</strong>{{ d.pros_text }}<br>
+            {% endif %}
+            {% if d.cons_text %}
+              <strong>デメリット：</strong>{{ d.cons_text }}
+            {% endif %}
+          {% else %}
+            （準備中）
+          {% endif %}
+        </td>
+      {% endfor %}
+    </tr>
+  {% endfor %}
+</table>
+{% endblock %}

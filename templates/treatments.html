@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>治療選択肢</h2>
+<table border="1" cellpadding="4">
+  <tr>
+    <th>治療名</th>
+    <th>概要</th>
+    <th></th>
+  </tr>
+  {% for t in options %}
+  <tr>
+    <td>{{ t.name }}</td>
+    <td>{{ t.brief_description }}</td>
+    <td><a href="{{ url_for('treatment_detail', treatment_id=t.id) }}">詳しく見る</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

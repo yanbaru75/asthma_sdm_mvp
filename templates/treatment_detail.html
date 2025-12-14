@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ treatment.name }}</h2>
+<p>{{ treatment.brief_description }}</p>
+
+<h3>この治療のポイント</h3>
+{% for attr in attributes %}
+  {% set detail = details_by_attr.get(attr.id) %}
+  <section style="margin-bottom: 1em;">
+    <h4>{{ attr.name }}</h4>
+    {% if detail %}
+      {% if detail.pros_text %}
+        <p><strong>メリット：</strong>{{ detail.pros_text }}</p>
+      {% endif %}
+      {% if detail.cons_text %}
+        <p><strong>デメリット：</strong>{{ detail.cons_text }}</p>
+      {% endif %}
+    {% else %}
+      <p>（準備中）</p>
+    {% endif %}
+  </section>
+{% endfor %}
+
+<hr>
+
+<h3>理解度チェック</h3>
+<form method="post">
+  {% for q in questions %}
+    <fieldset style="margin-bottom: 1em;">
+      <legend>{{ q.text }}</legend>
+      {% for c in q.choices %}
+        <label>
+          <input type="radio" name="question_{{
+                q.id }}" value="{{ c.score }}">
+          {{ c.label }}
+        </label><br>
+      {% endfor %}
+    </fieldset>
+  {% endfor %}
+
+  <h3>医療従事者に聞きたいこと</h3>
+  <p>気になる点や確認したいことがあれば自由に入力してください。</p>
+  <textarea name="ask_list" rows="4" cols="70"></textarea><br><br>
+
+  <button type="submit">結果を確認する</button>
+</form>
+{% endblock %}

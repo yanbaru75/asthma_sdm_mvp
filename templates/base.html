@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>重症喘息 SDM 支援アプリ（MVP）</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>重症喘息 SDM 支援アプリ（MVP）</h1>
+    <nav>
+      <a href="{{ url_for('index') }}">ホーム</a> |
+      <a href="{{ url_for('treatments') }}">治療選択肢</a> |
+      <a href="{{ url_for('compare') }}">比較表</a>
+    </nav>
+    <hr>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
